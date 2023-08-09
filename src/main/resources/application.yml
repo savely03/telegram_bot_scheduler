@@ -1,0 +1,19 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5436/bot_db
+    username: user
+    password: qwerty
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        format_sql: true
+  liquibase:
+    change-log: classpath:liquibase/db.changelog-master.yml
+server:
+  port: 8080
+
+telegram:
+  bot:
+    token: 6656496591:AAFmP298bgI2W6C_PnSEUm2eGrnjuBgOgqc
