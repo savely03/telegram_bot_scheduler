@@ -1,0 +1,11 @@
+version: '3'
+services:
+  psql:
+    image: postgres:15.3
+    container_name: telegram-bot-db
+    environment:
+      POSTGRES_DB: bot_db
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: qwerty
+    ports:
+      - '5436:5432'
