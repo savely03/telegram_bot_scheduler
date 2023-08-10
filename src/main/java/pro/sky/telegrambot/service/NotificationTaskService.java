@@ -9,5 +9,5 @@ public interface NotificationTaskService {
 
     List<NotificationTask> findAllByDateTime();
 
-    void notifyScheduledTasks();
+    void deleteAll(List<NotificationTask> tasks);
 }

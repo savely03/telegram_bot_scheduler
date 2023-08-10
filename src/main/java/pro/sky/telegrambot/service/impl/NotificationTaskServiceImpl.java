@@ -1,7 +1,5 @@
 package pro.sky.telegrambot.service.impl;
 
-import com.pengrad.telegrambot.TelegramBot;
-import com.pengrad.telegrambot.request.SendMessage;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,7 +17,6 @@ import java.util.List;
 public class NotificationTaskServiceImpl implements NotificationTaskService {
 
     private final NotificationTaskRepository notificationTaskRepository;
-    private final TelegramBot telegramBot;
 
     @Override
     @Transactional
@@ -34,9 +31,7 @@ public class NotificationTaskServiceImpl implements NotificationTaskService {
 
     @Override
     @Transactional
-    public void notifyScheduledTasks() {
-        List<NotificationTask> tasks = findAllByDateTime();
-        tasks.forEach(task -> telegramBot.execute(new SendMessage(task.getChatId(), task.getText())));
+    public void deleteAll(List<NotificationTask> tasks) {
         notificationTaskRepository.deleteAll(tasks);
     }
 }

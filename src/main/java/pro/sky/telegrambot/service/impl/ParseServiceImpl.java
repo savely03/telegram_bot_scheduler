@@ -1,12 +1,9 @@
 package pro.sky.telegrambot.service.impl;
 
-import com.pengrad.telegrambot.TelegramBot;
-import com.pengrad.telegrambot.request.SendMessage;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import pro.sky.telegrambot.entity.NotificationTask;
-import pro.sky.telegrambot.service.MessageService;
+import pro.sky.telegrambot.service.ParseService;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -18,11 +15,8 @@ import java.util.regex.Pattern;
 import static pro.sky.telegrambot.constant.Regex.MESSAGE_REGEX;
 
 @Service
-@RequiredArgsConstructor
 @Slf4j
-public class MessageServiceImpl implements MessageService {
-
-    private final TelegramBot telegramBot;
+public class ParseServiceImpl implements ParseService {
     @Override
     public Optional<NotificationTask> parseMessageToNotificationTask(Long chatId, String messageText) {
         Pattern pattern = Pattern.compile(MESSAGE_REGEX);
@@ -43,11 +37,6 @@ public class MessageServiceImpl implements MessageService {
         }
 
         return Optional.ofNullable(notificationTask);
-    }
-
-    @Override
-    public void sendMessage(Long chatId, String text) {
-        telegramBot.execute(new SendMessage(chatId, text));
     }
 
     private boolean checkDateTimeInMessage(LocalDateTime dateTime) {

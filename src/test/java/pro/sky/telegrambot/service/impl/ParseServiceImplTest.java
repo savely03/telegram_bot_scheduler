@@ -1,12 +1,6 @@
 package pro.sky.telegrambot.service.impl;
 
-import com.pengrad.telegrambot.TelegramBot;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.mockito.junit.jupiter.MockitoExtension;
 import pro.sky.telegrambot.entity.NotificationTask;
 
 import java.time.LocalDateTime;
@@ -15,16 +9,9 @@ import java.util.Optional;
 import java.util.concurrent.ThreadLocalRandom;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.any;
-import static org.mockito.Mockito.times;
 
-@ExtendWith(MockitoExtension.class)
-class MessageServiceImplTest {
-
-    @Mock
-    private TelegramBot telegramBot;
-    @InjectMocks
-    private MessageServiceImpl out;
+class ParseServiceImplTest {
+    private final ParseServiceImpl out = new ParseServiceImpl();
     private final Long chatId = ThreadLocalRandom.current().nextLong();
     private final String text = "SomeText";
 
@@ -53,12 +40,5 @@ class MessageServiceImplTest {
     @Test
     void parseMessageToNotificationWhenNotMatchesTest() {
         assertThat(out.parseMessageToNotificationTask(chatId, "")).isEmpty();
-    }
-
-    @Test
-    void sendMessage() {
-        out.sendMessage(chatId, text);
-
-        Mockito.verify(telegramBot, times(1)).execute(any());
     }
 }
